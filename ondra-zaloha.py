@@ -310,7 +310,22 @@ if sd == ("sd"):
     right(100)
     forward(24)
     right(90)
-
+    penup()
+    forward(180)
+    right(90)
+    forward(150)
+    right(20)
+    pendown()
+    forward(50)
+    right(144)
+    forward(50)
+    right(144)
+    forward(50)
+    right(144)
+    forward(50)
+    right(144)
+    forward(50)
+    right(144)
 
 
 
