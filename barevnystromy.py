@@ -87,6 +87,8 @@ def strom(kmen):
     color("black")
 
 def houba():
+    color("brown")
+    begin_fill()
     left(90)
     forward(7)
     left(90)
@@ -156,7 +158,8 @@ def houba():
     forward(7)
     left(90)
     forward(7)
-
+    end_fill()
+    color("black")
 def listnatystrom():
     left(90)
     forward(20)
@@ -322,8 +325,6 @@ def hvezda():
     end_fill()
     color("black")
 
-
-
 sd = textinput("blah", "co chceš sakra za tvar ????????????????????????? ")
 if sd == ("sd"):
 
@@ -370,6 +371,6 @@ if sd == ("sd"):
     right(20)
     pendown()
 
-    hvezda()
+
 
 exitonclick()
