@@ -98,3 +98,4 @@ print("Gratuluju, sebral jsi celkem,", skore, "zlata za", kroky, "kroků")
 
 
 
+
