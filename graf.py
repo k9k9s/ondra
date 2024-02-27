@@ -1,7 +1,7 @@
 import random
 from colorama import init, Fore, Style
 init()
-form inputimeout import inputimeout, timeoutOccured
+
 
 
 mistnosti = ["obývák", "chodba", "sklep", "trůnní sál","jídelna"]
@@ -10,7 +10,7 @@ zamcene_chodby = [[], [3], [], [],[]]
 inventar = {"klic" : False, "moje zlato":0,"burger":False}
 cena_burgeru=15
 sytost=4
-mistnost_s_klicem = 2
+klic = 2
 zlato = [1, 0, 10, 300,15]
 hrac = 0
 skore = 0
