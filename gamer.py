@@ -3,14 +3,14 @@ from colorama import init, Fore, Style
 init()
 
 
-mistnosti = ["obývák", "chodba", "sklep", "trůnní sál","jídelna"]
-chodby = [[1, 2,4], [0,4], [0], [1, 2],[1,0]]
-zamcene_chodby = [[], [3], [], [],[]]
+mistnosti = ["obývák", "chodba", "sklep", "trůnní sál","jídelna","terasa"]
+chodby = [[1, 2,4], [0,4], [0], [1, 2],[1,0,5],[4]]
+zamcene_chodby = [[], [3], [], [],[],[]]
 inventar = {"klic" : False, "moje zlato":0,"burger":False}
 cena_burgeru=15
 sytost=4
 mistnost_s_klicem = 2
-zlato = [1, 0, 10, 300,15]
+zlato = [1, 0, 10, 300,15,20]
 hrac = 0
 skore = 0
 kroky = 0
@@ -22,9 +22,19 @@ def je_cislo(mozna_cislo):
     except ValueError:
         return False
 def hotovo():
+
+
+
     return sum(zlato) == 0
 while not hotovo():
+
+
     print("mas sytost",sytost)
+
+    if hrac == sytost < 3:
+        print(Fore.RED + "pozor na sytost")
+        print(Style.RESET_ALL)
+
     if inventar["burger"]:
         print("mas burger")
     print("hráč je v místnosti:", mistnosti[hrac])
@@ -105,4 +115,5 @@ while not hotovo():
         print(Style.RESET_ALL)
         break
 if sytost > 0:
-    print("Gratuluju, sebral jsi celkem,", skore, "zlata za", kroky, "kroků")
+    print(Fore.GREEN + "Gratuluju, sebral jsi celkem,", skore, "zlata za", kroky, "kroků")
+    print(Style.RESET_ALL)
