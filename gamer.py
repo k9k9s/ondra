@@ -19,6 +19,7 @@ kroky = 0
 
 
 
+
 def je_cislo(mozna_cislo):
     try:
         int(mozna_cislo)
@@ -52,6 +53,13 @@ while not hotovo():
     if inventar["hasicak"]:
         print("mas hasičák")
 
+    print(mistnosti_co_hoří)
+
+    if hrac in mistnosti_co_hoří:
+        print(Fore.RED + "bůh vám vskazuje že jste uhořel")
+        print(Style.RESET_ALL)
+        break
+
 
 
 
@@ -61,7 +69,7 @@ while not hotovo():
     kam_lze_jit = chodby[hrac]
 
     pada_meteorit = False
-    if random.random() < 0.3 and hrac != 2 and kroky > 2:
+    if random.random() < 1.0 and hrac != 2 and kroky > 2:
         print(Fore.RED + "pozor padá meteorit")
         print(Style.RESET_ALL)
         pada_meteorit = True
@@ -105,6 +113,20 @@ while not hotovo():
         print(Fore.RED + "bůh vám skazuje že jte umřel při tragické nehodě pádu meteoritu")
         print(Style.RESET_ALL)
         break
+
+    if pada_meteorit and vstup in ["1" , "2"  , "3" ,"4"]:
+        mistnosti_co_hoří.append(hrac)
+
+
+
+
+
+
+
+
+
+
+
 
     if vstup == "x":
         skore += zlato[hrac]
