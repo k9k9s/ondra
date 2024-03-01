@@ -2,18 +2,22 @@ import random
 from colorama import init, Fore, Style
 init()
 
-
+mistnosti_co_hoří = []
 mistnosti = ["obývák", "chodba", "sklep", "trůnní sál","jídelna","terasa"]
 chodby = [[1, 2,4], [0,4], [0], [1, 2],[1,0,5],[4]]
 zamcene_chodby = [[], [3], [], [],[],[]]
-inventar = {"klic" : False, "moje zlato":0,"burger":False}
+inventar = {"klic" : False, "moje zlato":0,"burger":False,"hasicak":False}
 cena_burgeru=15
 sytost=4
-mistnost_s_klicem = 2
+mistnost_s_klicem = 5
+mistnost_s_hasicakem = 2
 zlato = [1, 0, 10, 300,15,20]
 hrac = 0
 skore = 0
 kroky = 0
+
+
+
 
 def je_cislo(mozna_cislo):
     try:
@@ -31,12 +35,26 @@ while not hotovo():
 
     print("mas sytost",sytost)
 
-    if hrac == sytost < 3:
+    if sytost == 2:
+        print(Fore.RED + "pozor na sytost")
+        print(Style.RESET_ALL)
+
+    if sytost == 1:
         print(Fore.RED + "pozor na sytost")
         print(Style.RESET_ALL)
 
     if inventar["burger"]:
         print("mas burger")
+
+    if inventar["klic"]:
+        print("mas klíč")
+
+    if inventar["hasicak"]:
+        print("mas hasičák")
+
+
+
+
     print("hráč je v místnosti:", mistnosti[hrac])
     print("hráč má", skore, "zlata")
     print("zbývá zlata:", sum(zlato))
@@ -56,6 +74,8 @@ while not hotovo():
         print("Moznost X : sebrat", zlato[hrac], "zlata")
     if hrac == mistnost_s_klicem:
         print("Moznost C : sebrat klíč")
+    if hrac == mistnost_s_hasicakem:
+        print("Moznost H : sebrat hasicak")
     if inventar["klic"] and zamcene_chodby[hrac]:
         print("Moznost R : odemknout dveře ->", mistnosti[zamcene_chodby[hrac][-1]])
     if hrac == 4 or inventar["burger"]:
@@ -68,6 +88,8 @@ while not hotovo():
         vstup = input("> ")
         if not inventar["klic"] and mistnost_s_klicem==hrac and vstup=="c":
             vstup_ok=True
+        if not inventar["hasicak"] and mistnost_s_hasicakem==hrac and vstup=="h":
+            vstup_ok=True
         elif zlato[hrac] and vstup=="x":
             vstup_ok=True
         elif (hrac==4 or inventar["burger"]) and vstup=="j":
@@ -79,7 +101,7 @@ while not hotovo():
         elif je_cislo(vstup) and int(vstup) <= len(kam_lze_jit) and int(vstup) > 0:
             vstup_ok=True
 
-    if pada_meteorit and vstup in ["x" , "k"  , "j" ,"b" , "r"]:
+    if pada_meteorit and vstup in ["x" , "k"  , "j" ,"b" , "r", "h"]:
         print(Fore.RED + "bůh vám skazuje že jte umřel při tragické nehodě pádu meteoritu")
         print(Style.RESET_ALL)
         break
@@ -97,6 +119,9 @@ while not hotovo():
             inventar["burger"]=False
     elif vstup == "b":
         inventar["burger"]=True
+    elif vstup == "h":
+        inventar["hasicak"] = True
+        mistnost_s_klicem = -1
 
     elif vstup == "r":
         cilova_mistnost = zamcene_chodby[hrac].pop()
