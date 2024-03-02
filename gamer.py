@@ -31,12 +31,10 @@ def je_cislo(mozna_cislo):
     except ValueError:
         return False
 def hotovo():
-
-
-
     return sum(zlato) == 0
-while not hotovo():
 
+
+while not hotovo():
 
     print("mas sytost",sytost)
 
@@ -137,18 +135,11 @@ while not hotovo():
         mistnosti_co_hoří.append(hrac)
 
 
-
-
-
-
-
-
-
     if vstup == "x":
         skore += zlato[hrac]
         inventar["moje zlato"]+=zlato[hrac]
         zlato[hrac] = 0
-    if vstup == "u":
+    elif vstup == "u":
         mistnosti_co_hoří = []
         kam_lze_jit_a_hori = []
         for element in kam_lze_jit_a_hori:
@@ -183,6 +174,7 @@ while not hotovo():
         print(Fore.RED + "bůh vám skazuje že jte umřel hlady")
         print(Style.RESET_ALL)
         break
+
 if sytost > 0:
     print(Fore.GREEN + "Gratuluju, sebral jsi celkem,", skore, "zlata za", kroky, "kroků")
     print(Style.RESET_ALL)
