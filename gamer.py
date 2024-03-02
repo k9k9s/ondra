@@ -3,6 +3,7 @@ from colorama import init, Fore, Style
 init()
 
 mistnosti_co_hoří = []
+kam_lze_jit_a_hori = []
 mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa"]
 chodby = [[1, 2,4], [0,4], [0], [1, 2],[1,0,5],[4]]
 zamcene_chodby = [[], [3], [], [],[],[]]
@@ -17,6 +18,8 @@ skore = 0
 kroky = 0
 
 
+
+
 def prunik(seznam1, seznam2):
     return list(set(seznam1) & set(seznam2))
 
@@ -28,12 +31,10 @@ def je_cislo(mozna_cislo):
     except ValueError:
         return False
 def hotovo():
-
-
-
     return sum(zlato) == 0
-while not hotovo():
 
+
+while not hotovo():
 
     print("mas sytost",sytost)
 
@@ -97,9 +98,12 @@ while not hotovo():
         print("moznost J: najíst se")
     if hrac == 4 and inventar["moje zlato"] >= cena_burgeru:
         print("prodavačka říká:Chceš burger?řekni b")
+    if not (kam_lze_jit_a_hori == []) and inventar["hasicak"]:
+        print("moznost U : uhasit mistnosti kolem co hoří")
     if not (kam_lze_jit_a_hori == [] ):
         print(Fore.YELLOW + "pozor můžeš jít do místnosti co hoří", kam_lze_jit_a_hori)
         print(Style.RESET_ALL)
+
 
 
     vstup_ok=False
@@ -110,6 +114,8 @@ while not hotovo():
         if not inventar["hasicak"] and mistnost_s_hasicakem==hrac and vstup=="h":
             vstup_ok=True
         elif zlato[hrac] and vstup=="x":
+            vstup_ok=True
+        elif vstup=="u":
             vstup_ok=True
         elif (hrac==4 or inventar["burger"]) and vstup=="j":
             vstup_ok=True
@@ -129,17 +135,15 @@ while not hotovo():
         mistnosti_co_hoří.append(hrac)
 
 
-
-
-
-
-
-
-
     if vstup == "x":
         skore += zlato[hrac]
         inventar["moje zlato"]+=zlato[hrac]
         zlato[hrac] = 0
+    elif vstup == "u":
+        mistnosti_co_hoří = []
+        kam_lze_jit_a_hori = []
+        for element in kam_lze_jit_a_hori:
+            mistnosti_co_hoří.remove(element)
     elif vstup == "c":
         inventar["klic"] = True
         mistnost_s_klicem = -1
@@ -152,6 +156,7 @@ while not hotovo():
     elif vstup == "h":
         inventar["hasicak"] = True
         mistnost_s_klicem = -1
+
 
     elif vstup == "r":
         cilova_mistnost = zamcene_chodby[hrac].pop()
@@ -169,6 +174,7 @@ while not hotovo():
         print(Fore.RED + "bůh vám skazuje že jte umřel hlady")
         print(Style.RESET_ALL)
         break
+
 if sytost > 0:
     print(Fore.GREEN + "Gratuluju, sebral jsi celkem,", skore, "zlata za", kroky, "kroků")
     print(Style.RESET_ALL)
