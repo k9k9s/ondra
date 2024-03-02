@@ -71,7 +71,7 @@ while not hotovo():
     kam_lze_jit = chodby[hrac]
 
     pada_meteorit = False
-    if random.random() < 1.0 and hrac != 2 and kroky > 2:
+    if random.random() < 0.3 and hrac != 2 and kroky > 2:
         print(Fore.RED + "pozor padá meteorit")
         print(Style.RESET_ALL)
         pada_meteorit = True
@@ -126,7 +126,7 @@ while not hotovo():
         elif je_cislo(vstup) and int(vstup) <= len(kam_lze_jit) and int(vstup) > 0:
             vstup_ok=True
 
-    if pada_meteorit and vstup in ["x" , "k"  , "j" ,"b" , "r", "h"]:
+    if pada_meteorit and vstup in ["x" , "k"  , "j" ,"b" , "r", "h", "u"]:
         print(Fore.RED + "bůh vám skazuje že jte umřel při tragické nehodě pádu meteoritu")
         print(Style.RESET_ALL)
         break
