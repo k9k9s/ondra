@@ -3,7 +3,7 @@ from colorama import init, Fore, Style
 init()
 
 mistnosti_co_hoří = []
-mistnosti = ["obývák", "chodba", "sklep", "trůnní sál","jídelna","terasa"]
+mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa"]
 chodby = [[1, 2,4], [0,4], [0], [1, 2],[1,0,5],[4]]
 zamcene_chodby = [[], [3], [], [],[],[]]
 inventar = {"klic" : False, "moje zlato":0,"burger":False,"hasicak":False}
@@ -17,7 +17,8 @@ skore = 0
 kroky = 0
 
 
-
+def prunik(seznam1, seznam2):
+    return list(set(seznam1) & set(seznam2))
 
 
 def je_cislo(mozna_cislo):
@@ -55,7 +56,7 @@ while not hotovo():
 
     print(mistnosti_co_hoří)
 
-    if hrac in mistnosti_co_hoří and not inventar["hasicak"]:
+    if hrac in mistnosti_co_hoří:
         print(Fore.RED + "bůh vám vskazuje že jste uhořel")
         print(Style.RESET_ALL)
         break
@@ -76,6 +77,12 @@ while not hotovo():
 
 
 
+
+    # kam_lze_jit_a_hori = chodby[hrac] and mistnosti_co_hoří
+
+    kam_lze_jit_a_hori = prunik(kam_lze_jit, mistnosti_co_hoří)
+
+
     for i, moznost in enumerate(kam_lze_jit):
         print("Moznost", i + 1, ": ", mistnosti[moznost])
     if zlato[hrac] > 0:
@@ -90,6 +97,9 @@ while not hotovo():
         print("moznost J: najíst se")
     if hrac == 4 and inventar["moje zlato"] >= cena_burgeru:
         print("prodavačka říká:Chceš burger?řekni b")
+    if not (kam_lze_jit_a_hori == [] ):
+        print(Fore.YELLOW + "pozor můžeš jít do místnosti co hoří", kam_lze_jit_a_hori)
+        print(Style.RESET_ALL)
 
 
     vstup_ok=False
