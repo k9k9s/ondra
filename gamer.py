@@ -55,7 +55,7 @@ while not hotovo():
 
     print(mistnosti_co_hoří)
 
-    if hrac in mistnosti_co_hoří:
+    if hrac in mistnosti_co_hoří and not inventar["hasicak"]:
         print(Fore.RED + "bůh vám vskazuje že jste uhořel")
         print(Style.RESET_ALL)
         break
@@ -91,6 +91,7 @@ while not hotovo():
     if hrac == 4 and inventar["moje zlato"] >= cena_burgeru:
         print("prodavačka říká:Chceš burger?řekni b")
 
+
     vstup_ok=False
     while not vstup_ok:
         vstup = input("> ")
@@ -116,9 +117,6 @@ while not hotovo():
 
     if pada_meteorit and vstup in ["1" , "2"  , "3" ,"4"]:
         mistnosti_co_hoří.append(hrac)
-
-
-
 
 
 
