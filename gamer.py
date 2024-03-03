@@ -5,11 +5,11 @@ init()
 mistnosti_co_hoří = []
 kam_lze_jit_a_hori = []
 mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa","6-půda"]
-chodby = [[1, 2,4], [0,4,6], [0], [1, 2],[1,0,5],[4,6],[1,5]]
-zamcene_chodby = [[], [3], [], [],[],[]]
+chodby = [[1, 2,4], [0,4,6], [0], [1, 2],[1,0,5],[4,6],[5,1]]
+zamcene_chodby = [[], [3], [], [],[],[],[]]
 inventar = {"klic" : False, "moje zlato":0,"burger":False,"hasicak":False}
 cena_burgeru=15
-sytost=10
+sytost=4
 mistnost_s_klicem = 5
 mistnost_s_hasicakem = 2
 zlato = [1, 0, 10, 300,15,20,3]
