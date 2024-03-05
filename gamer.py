@@ -53,7 +53,6 @@ while not hotovo():
     if prisera is not None:
         print(Fore.YELLOW + "prisera je v mistnosti " + mistnosti[prisera])
         print(Style.RESET_ALL)
-        break
     print(mistnosti_co_hoří)
 
 
@@ -79,7 +78,7 @@ while not hotovo():
 
 
 
-    # kam_lze_jit_a_hori = chodby[hrac] and mistnosti_co_hoří
+
     kam_lze_jit_a_hori = prunik(kam_lze_jit, mistnosti_co_hoří)
 
 
