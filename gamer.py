@@ -4,16 +4,16 @@ init()
 
 mistnosti_co_hoří = []
 kam_lze_jit_a_hori = []
-mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa","6-půda","7-kumbál"]
-chodby = [[1, 2,4], [0,4,6], [0], [1, 2],[1,0,5,7],[4,6],[1,5],[4]]
-zamcene_chodby = [[], [3], [], [],[],[],[],[]]
+mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa","6-půda","7-kumbál","8-pokoj"]
+chodby = [[1, 2,4], [0,4,6,8], [0], [1, 2],[1,0,5,7],[4,6],[1,5],[4],[1]]
+zamcene_chodby = [[], [3], [], [],[],[],[],[],[]]
 inventar = {"klic" : False, "moje zlato":0,"burger":False,"hasicak":False}
 cena_burgeru=15
 sytost=4
-mistnost_s_klicem = random.choice([1,2,4,5,6,7])
+mistnost_s_klicem = random.choice([1,2,4,5,6,7,8])
 mistnost_s_hasicakem = 2
 mistnost_s_pasti = 1
-zlato = [1, 0, 10, 300,15,20,3,0]
+zlato = [1, 0, 10, 300,15,20,3,0,50]
 hrac = 0
 skore = 0
 kroky = 0
@@ -31,6 +31,7 @@ def je_cislo(mozna_cislo):
 def hotovo():
     return sum(zlato) == 0
 
+
 #diagnostika
 while not hotovo():
     print("mas sytost",sytost)
@@ -46,9 +47,13 @@ while not hotovo():
         print("mas klíč")
     if inventar["hasicak"]:
         print("mas hasičák")
+    print(mistnosti_co_hoří)
+    if hrac in mistnosti_co_hoří:
+        print(Fore.RED + "bůh vám vskazuje že jste uhořel")
     if prisera is not None:
         print(Fore.YELLOW + "prisera je v mistnosti " + mistnosti[prisera])
         print(Style.RESET_ALL)
+        break
     print(mistnosti_co_hoří)
 
 
@@ -61,12 +66,12 @@ while not hotovo():
     kam_lze_jit = chodby[hrac]
 
     pada_meteorit = False
-    if random.random() < 0.0 and hrac != 2 and kroky > 2:
+    if random.random() < 0.3 and hrac != 2 and kroky > 2:
         print(Fore.RED + "pozor padá meteorit")
         print(Style.RESET_ALL)
         pada_meteorit = True
 
-    if random.random() < 0.5 and hrac == mistnost_s_pasti and prisera is None:
+    if random.random() < 0.7 and hrac == mistnost_s_pasti and prisera is None:
         print(Fore.RED + "šlápl jsi na past a vypustil jsi příšeru")
         print(Style.RESET_ALL)
         prisera = 2
@@ -76,6 +81,7 @@ while not hotovo():
 
     # kam_lze_jit_a_hori = chodby[hrac] and mistnosti_co_hoří
     kam_lze_jit_a_hori = prunik(kam_lze_jit, mistnosti_co_hoří)
+
 
     # moznosti
     for i, moznost in enumerate(kam_lze_jit):
@@ -97,6 +103,7 @@ while not hotovo():
     if not (kam_lze_jit_a_hori == [] ):
         print(Fore.YELLOW + "pozor můžeš jít do místnosti co hoří", kam_lze_jit_a_hori)
         print(Style.RESET_ALL)
+
 
     #kontrola
     vstup_ok=False
@@ -124,9 +131,7 @@ while not hotovo():
         print(Fore.RED + "bůh vám skazuje že jte umřel při tragické nehodě pádu meteoritu")
         print(Style.RESET_ALL)
         break
-
-
-    if pada_meteorit and vstup in ["1" , "2"  , "3" ,"4"]:
+    if pada_meteorit and vstup in ["1" , "2"  , "3" ,"4","5","6"]:
         mistnosti_co_hoří.append(hrac)
     if vstup == "x":
         skore += zlato[hrac]
@@ -135,8 +140,6 @@ while not hotovo():
     elif vstup == "u":
         mistnosti_co_hoří = []
         kam_lze_jit_a_hoři = []
-        for element in kam_lze_jit_a_hori:
-            mistnosti_co_hoří.remove(element)
     elif vstup == "c":
         inventar["klic"] = True
         mistnost_s_klicem = -1
@@ -153,6 +156,8 @@ while not hotovo():
         cilova_mistnost = zamcene_chodby[hrac].pop()
         chodby[hrac].append(cilova_mistnost)
         print("Slyšíš jak cvaknul zámek a dveře se otevřely.")
+
+
     else:
         hrac = kam_lze_jit[int(vstup) - 1]
 
