@@ -1,6 +1,7 @@
 import random
 from colorama import init, Fore, Style
 init()
+
 mistnosti_co_hoří = []
 kam_lze_jit_a_hori = []
 mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa","6-půda","7-kumbál"]
@@ -11,10 +12,12 @@ cena_burgeru=15
 sytost=4
 mistnost_s_klicem = random.choice([1,2,4,5,6,7])
 mistnost_s_hasicakem = 2
+mistnost_s_pasti = 1
 zlato = [1, 0, 10, 300,15,20,3,0]
 hrac = 0
 skore = 0
 kroky = 0
+prisera = None
 
 
 def prunik(seznam1, seznam2):
@@ -28,7 +31,7 @@ def je_cislo(mozna_cislo):
 def hotovo():
     return sum(zlato) == 0
 
-
+#diagnostika
 while not hotovo():
     print("mas sytost",sytost)
     if sytost == 2:
@@ -43,26 +46,38 @@ while not hotovo():
         print("mas klíč")
     if inventar["hasicak"]:
         print("mas hasičák")
-    print(mistnosti_co_hoří)
-    if hrac in mistnosti_co_hoří:
-        print(Fore.RED + "bůh vám vskazuje že jste uhořel")
+    if prisera is not None:
+        print(Fore.YELLOW + "prisera je v mistnosti " + mistnosti[prisera])
         print(Style.RESET_ALL)
-        break
+    print(mistnosti_co_hoří)
+
+
+
 
 
     print("hráč je v místnosti:", mistnosti[hrac])
     print("hráč má", skore, "zlata")
     print("zbývá zlata:", sum(zlato))
     kam_lze_jit = chodby[hrac]
+
     pada_meteorit = False
-    if random.random() < 0.3 and hrac != 2 and kroky > 2:
+    if random.random() < 0.0 and hrac != 2 and kroky > 2:
         print(Fore.RED + "pozor padá meteorit")
         print(Style.RESET_ALL)
         pada_meteorit = True
+
+    if random.random() < 0.5 and hrac == mistnost_s_pasti and prisera is None:
+        print(Fore.RED + "šlápl jsi na past a vypustil jsi příšeru")
+        print(Style.RESET_ALL)
+        prisera = 2
+
+
+
+
     # kam_lze_jit_a_hori = chodby[hrac] and mistnosti_co_hoří
     kam_lze_jit_a_hori = prunik(kam_lze_jit, mistnosti_co_hoří)
 
-
+    # moznosti
     for i, moznost in enumerate(kam_lze_jit):
         print("Moznost", i + 1, ": ", mistnosti[moznost])
     if zlato[hrac] > 0:
@@ -83,7 +98,7 @@ while not hotovo():
         print(Fore.YELLOW + "pozor můžeš jít do místnosti co hoří", kam_lze_jit_a_hori)
         print(Style.RESET_ALL)
 
-
+    #kontrola
     vstup_ok=False
     while not vstup_ok:
         vstup = input("> ")
@@ -103,6 +118,8 @@ while not hotovo():
             vstup_ok=True
         elif je_cislo(vstup) and int(vstup) <= len(kam_lze_jit) and int(vstup) > 0:
             vstup_ok=True
+
+    #vyhodnocovani
     if pada_meteorit and vstup in ["x" , "k"  , "j" ,"b" , "r", "h", "u"]:
         print(Fore.RED + "bůh vám skazuje že jte umřel při tragické nehodě pádu meteoritu")
         print(Style.RESET_ALL)
@@ -136,16 +153,25 @@ while not hotovo():
         cilova_mistnost = zamcene_chodby[hrac].pop()
         chodby[hrac].append(cilova_mistnost)
         print("Slyšíš jak cvaknul zámek a dveře se otevřely.")
-
-
     else:
         hrac = kam_lze_jit[int(vstup) - 1]
+
+    if hrac == prisera:
+        print(Fore.RED + "bůh vám skazuje že si vás dala prisera ke svace")
+        print(Style.RESET_ALL)
+        break
     sytost-=1
     kroky += 1
     if sytost == 0:
         print(Fore.RED + "bůh vám skazuje že jte umřel hlady")
         print(Style.RESET_ALL)
         break
+    if hrac in mistnosti_co_hoří:
+        print(Fore.RED + "bůh vám vskazuje že jste uhořel")
+        print(Style.RESET_ALL)
+        break
+    if prisera is not None:
+        prisera = random.choice(chodby[prisera])
 
 if sytost > 0:
     print(Fore.GREEN + "Gratuluju, sebral jsi celkem,", skore, "zlata za", kroky, "kroků")
