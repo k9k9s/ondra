@@ -70,7 +70,7 @@ while not hotovo():
         print(Style.RESET_ALL)
         pada_meteorit = True
 
-    if random.random() < 1.0 and hrac == mistnost_s_pasti and prisera is None:
+    if random.random() < 0.7 and hrac == mistnost_s_pasti and prisera is None:
         print(Fore.RED + "šlápl jsi na past a vypustil jsi příšeru")
         print(Style.RESET_ALL)
         prisera = 2
