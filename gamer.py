@@ -4,16 +4,16 @@ init()
 
 mistnosti_co_hoří = []
 kam_lze_jit_a_hori = []
-mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa","6-půda","7-kumbál","8-pokoj"]
-chodby = [[1, 2,4], [0,4,6,8], [0], [1, 2],[1,0,5,7],[4,6],[1,5],[4],[1]]
-zamcene_chodby = [[], [3], [], [],[],[],[],[],[]]
+mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál","4-jídelna","5-terasa","6-půda","7-kumbál","8-pokoj","9-ložnice","10-chodba"]
+chodby = [[1, 2,4], [0,4,6], [0], [1, 2],[1,0,5,7],[4,6,10],[1,5],[4],[10],[10],[9,8,5]]
+zamcene_chodby = [[], [3], [], [],[],[],[],[],[],[],[]]
 inventar = {"klic" : False, "moje zlato":0,"burger":False,"hasicak":False}
 cena_burgeru=15
 sytost=4
-mistnost_s_klicem = random.choice([1,2,4,5,6,7,8])
+mistnost_s_klicem = random.choice([1,2,5,6,7,8,9,10])
 mistnost_s_hasicakem = 2
 mistnost_s_pasti = 1
-zlato = [1, 0, 10, 300,15,20,3,0,50]
+zlato = [1, 0, 10, 300,15,20,3,0,50,30,0]
 hrac = 0
 skore = 0
 kroky = 0
@@ -70,7 +70,7 @@ while not hotovo():
         print(Style.RESET_ALL)
         pada_meteorit = True
 
-    if random.random() < 0.7 and hrac == mistnost_s_pasti and prisera is None:
+    if random.random() < 1.0 and hrac == mistnost_s_pasti and prisera is None:
         print(Fore.RED + "šlápl jsi na past a vypustil jsi příšeru")
         print(Style.RESET_ALL)
         prisera = 2
