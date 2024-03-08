@@ -81,6 +81,13 @@ while not hotovo():
         print(Style.RESET_ALL)
         prisera = 2
 
+    if hrac == mistnost_s_voldemortem:
+        print(Fore.RED + "pozor jsi v místnosti z voldemortem")
+        print(Style.RESET_ALL)
+    if hrac == mistnost_s_baziliskem:
+        print(Fore.RED + "pozor jsi v místnosti z baziliskem")
+        print(Style.RESET_ALL)
+
 
 
 
