@@ -49,8 +49,44 @@ LIGHT_PURPLE = (221, 160, 221)
 LIGHT_PINK = (255, 182, 193)
 LIGHT_BROWN = (210, 105, 30)
 
+def tank(x):
+    pygame.draw.rect(screen, DARK_GREEN,(x+500, 500, 25, 25))
+    pygame.draw.rect(screen, DARK_GRAY, (x+490, 490, 45, 10))
+    pygame.draw.rect(screen, DARK_GRAY, (x+490, 525, 45, 10))
 
+    pygame.draw.rect(screen, WHITE, (x+492, 525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+502, 525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+512, 525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+522, 525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+532, 525, 2, 10))
 
+    pygame.draw.rect(screen, WHITE, (x+492, 490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+502, 490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+512, 490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+522, 490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+532, 490, 2, 10))
+
+    pygame.draw.rect(screen, BLACK, (x+511, 505, 5, 2))
+    pygame.draw.rect(screen, BLACK, (x+511, 520, 5, 2))
+
+    pygame.draw.rect(screen, BLACK, (x+505, 511, 2, 5))
+    pygame.draw.rect(screen, BLACK, (x+520, 511, 2, 5))
+
+    pygame.draw.rect(screen, BLACK, (x+506, 509, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+507, 507, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+509, 506, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+516, 506, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+518, 507, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+519, 509, 2, 2))
+
+    pygame.draw.rect(screen, BLACK, (x+506, 516, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+507, 518, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+509, 519, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+516, 519, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+518, 518, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+519, 516, 2, 2))
+
+    pygame.draw.rect(screen, BLACK, (x+520, 511, 15, 5))
 
 
 # Vytvoření okna
@@ -70,44 +106,7 @@ while running:
     screen.fill(RED)
 
     # Vykreslení kámenem inspirovaného obrazce
-
-    pygame.draw.rect(screen, DARK_GREEN, (500, 500, 25, 25))
-    pygame.draw.rect(screen, DARK_GRAY, (490, 490, 45, 10))
-    pygame.draw.rect(screen, DARK_GRAY, (490, 525, 45, 10))
-
-    pygame.draw.rect(screen, WHITE, (492, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (502, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (512, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (522, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (532, 525, 2, 10))
-
-    pygame.draw.rect(screen, WHITE, (492, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (502, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (512, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (522, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (532, 490, 2, 10))
-
-    pygame.draw.rect(screen, BLACK, (511, 505, 5, 2))
-    pygame.draw.rect(screen, BLACK, (511, 520, 5, 2))
-
-    pygame.draw.rect(screen, BLACK, (505, 511, 2, 5))
-    pygame.draw.rect(screen, BLACK, (520, 511, 2, 5))
-
-    pygame.draw.rect(screen, BLACK, (506, 509, 2, 2))
-    pygame.draw.rect(screen, BLACK, (507, 507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (509, 506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (516, 506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (518, 507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (519, 509, 2, 2))
-
-    pygame.draw.rect(screen, BLACK, (506, 516, 2, 2))
-    pygame.draw.rect(screen, BLACK, (507, 518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (509, 519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (516, 519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (518, 518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (519, 516, 2, 2))
-
-    pygame.draw.rect(screen, BLACK, (520, 511, 15, 5))
+    tank(0)
 
 
     # Aktualizace obrazovky
