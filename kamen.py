@@ -49,49 +49,54 @@ LIGHT_PURPLE = (221, 160, 221)
 LIGHT_PINK = (255, 182, 193)
 LIGHT_BROWN = (210, 105, 30)
 
-def tank(x):
-    pygame.draw.rect(screen, DARK_GREEN,(x+500, 500, 25, 25))
-    pygame.draw.rect(screen, DARK_GRAY, (x+490, 490, 45, 10))
-    pygame.draw.rect(screen, DARK_GRAY, (x+490, 525, 45, 10))
 
-    pygame.draw.rect(screen, WHITE, (x+492, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+502, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+512, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+522, 525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+532, 525, 2, 10))
+DARK_BROWN = (139, 69, 19)
 
-    pygame.draw.rect(screen, WHITE, (x+492, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+502, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+512, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+522, 490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+532, 490, 2, 10))
+def tank(x,y):
+    pygame.draw.rect(screen, DARK_GREEN,(x+500, y+500, 25, 25))
+    pygame.draw.rect(screen, DARK_GRAY, (x+490, y+490, 45, 10))
+    pygame.draw.rect(screen, DARK_GRAY, (x+490, y+525, 45, 10))
 
-    pygame.draw.rect(screen, BLACK, (x+511, 505, 5, 2))
-    pygame.draw.rect(screen, BLACK, (x+511, 520, 5, 2))
+    pygame.draw.rect(screen, WHITE, (x+492, y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+502, y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+512, y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+522, y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+532, y+525, 2, 10))
 
-    pygame.draw.rect(screen, BLACK, (x+505, 511, 2, 5))
-    pygame.draw.rect(screen, BLACK, (x+520, 511, 2, 5))
+    pygame.draw.rect(screen, WHITE, (x+492, y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+502, y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+512, y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+522, y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+532, y+490, 2, 10))
 
-    pygame.draw.rect(screen, BLACK, (x+506, 509, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+507, 507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+509, 506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+516, 506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+518, 507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+519, 509, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+511, y+505, 5, 2))
+    pygame.draw.rect(screen, BLACK, (x+511, y+520, 5, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+506, 516, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+507, 518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+509, 519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+516, 519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+518, 518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+519, 516, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+505, y+511, 2, 5))
+    pygame.draw.rect(screen, BLACK, (x+520, y+511, 2, 5))
 
-    pygame.draw.rect(screen, BLACK, (x+520, 511, 15, 5))
+    pygame.draw.rect(screen, BLACK, (x+506, y+509, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+507, y+507, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+509, y+506, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+516, y+506, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+518, y+507, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+519, y+509, 2, 2))
+
+    pygame.draw.rect(screen, BLACK, (x+506, y+516, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+507, y+518, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+509, y+519, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+516, y+519, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+518, y+518, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+519, y+516, 2, 2))
+
+    pygame.draw.rect(screen, BLACK, (x+520, y+511, 15, 5))
 
 
 # Vytvoření okna
 screen = pygame.display.set_mode(WINDOW_SIZE)
-pygame.display.set_caption("Kámen")
+pygame.display.set_caption("hra")
+
+
 
 # Hlavní smyčka
 running = True
@@ -103,14 +108,16 @@ while running:
 
 
     # Vykreslení modrého pozadí
-    screen.fill(RED)
+    screen.fill(DARK_BROWN)
 
     # Vykreslení kámenem inspirovaného obrazce
-    tank(0)
+    tank(-400,200)
 
 
     # Aktualizace obrazovky
     pygame.display.flip()
+
+
 
 # Ukončení pygame
 pygame.quit()
