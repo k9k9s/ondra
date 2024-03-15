@@ -1,4 +1,3 @@
-
 import pygame
 import sys
 
@@ -52,6 +51,15 @@ LIGHT_BROWN = (210, 105, 30)
 
 DARK_BROWN = (139, 69, 19)
 
+
+
+
+def palma(screen):
+    # Načtení obrázku tanku
+    palma = pygame.image.load("C:\\python/python-palma.png")
+    screen.blit(palma, (300, 200))
+
+
 def tank(x,y):
     pygame.draw.rect(screen, DARK_GREEN,(x+500, y+500, 25, 25))
     pygame.draw.rect(screen, DARK_GRAY, (x+490, y+490, 45, 10))
@@ -92,6 +100,11 @@ def tank(x,y):
     pygame.draw.rect(screen, BLACK, (x+520, y+511, 15, 5))
 
 
+
+
+
+
+
 # Vytvoření okna
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("hra")
@@ -112,6 +125,7 @@ while running:
 
     # Vykreslení kámenem inspirovaného obrazce
     tank(-400,200)
+    palma(screen)
 
 
     # Aktualizace obrazovky
