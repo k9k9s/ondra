@@ -129,9 +129,9 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == dopredu:
-                rychlost[0] = 1.5
+                rychlost[0] = 2
             if event.key == dozadu:
-                rychlost[0] = -1.5
+                rychlost[0] = -2
 
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
