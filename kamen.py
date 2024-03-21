@@ -61,43 +61,43 @@ def palma(screen):
 
 
 def tank(x,y):
-    pygame.draw.rect(screen, DARK_GREEN,(x+500, y+500, 25, 25))
-    pygame.draw.rect(screen, DARK_GRAY, (x+490, y+490, 45, 10))
-    pygame.draw.rect(screen, DARK_GRAY, (x+490, y+525, 45, 10))
+    pygame.draw.rect(screen, DARK_GREEN,(x+500 - 490 , y+500, 25, 25))
+    pygame.draw.rect(screen, DARK_GRAY, (x+490 - 490 , y+490, 45, 10))
+    pygame.draw.rect(screen, DARK_GRAY, (x+490 - 490 , y+525, 45, 10))
 
-    pygame.draw.rect(screen, WHITE, (x+492, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+502, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+512, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+522, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+532, y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+492 - 490 , y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+502 - 490 , y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+512 - 490 , y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+522 - 490 , y+525, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+532 - 490 , y+525, 2, 10))
 
-    pygame.draw.rect(screen, WHITE, (x+492, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+502, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+512, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+522, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+532, y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+492 - 490 , y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+502 - 490 , y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+512 - 490 , y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+522 - 490 , y+490, 2, 10))
+    pygame.draw.rect(screen, WHITE, (x+532 - 490 , y+490, 2, 10))
 
-    pygame.draw.rect(screen, BLACK, (x+511, y+505, 5, 2))
-    pygame.draw.rect(screen, BLACK, (x+511, y+520, 5, 2))
+    pygame.draw.rect(screen, BLACK, (x+511 - 490 , y+505, 5, 2))
+    pygame.draw.rect(screen, BLACK, (x+511 - 490 , y+520, 5, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+505, y+511, 2, 5))
-    pygame.draw.rect(screen, BLACK, (x+520, y+511, 2, 5))
+    pygame.draw.rect(screen, BLACK, (x+505 - 490 , y+511, 2, 5))
+    pygame.draw.rect(screen, BLACK, (x+520 - 490 , y+511, 2, 5))
 
-    pygame.draw.rect(screen, BLACK, (x+506, y+509, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+507, y+507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+509, y+506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+516, y+506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+518, y+507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+519, y+509, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+506 - 490 , y+509, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+507 - 490 , y+507, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+509 - 490 , y+506, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+516 - 490 , y+506, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+518 - 490 , y+507, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+519 - 490 , y+509, 2, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+506, y+516, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+507, y+518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+509, y+519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+516, y+519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+518, y+518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+519, y+516, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+506 - 490, y+516, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+507 - 490, y+518, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+509 - 490, y+519, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+516 - 490, y+519, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+518 - 490, y+518, 2, 2))
+    pygame.draw.rect(screen, BLACK, (x+519 - 490, y+516, 2, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+520, y+511, 15, 5))
+    pygame.draw.rect(screen, BLACK, (x+520 - 490, y+511, 15, 5))
 
 
 
@@ -109,6 +109,19 @@ def tank(x,y):
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("hra")
 
+clock = pygame.time.Clock()
+fps = 60
+
+
+dopredu = pygame.K_w
+dozadu = pygame.K_s
+vpravo = pygame.K_d
+vlevo = pygame.K_a
+
+
+pozice = [0, 0]
+rychlost = [0, 0]
+
 
 
 # Hlavní smyčka
@@ -118,13 +131,27 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    if event.type == pygame.KEYDOWN:
+        # zmackl klavesu
+        if event.key == dopredu:
+            rychlost[0] = 2
+        if event.key == dozadu:
+            rychlost[0] = -2
+
+
+    if event.type == pygame.KEYUP:
+        # pustil klavesu
+        if event.key == dopredu:
+            rychlost[0] = 0
+        if event.key == dozadu:
+            rychlost[0] = 0
 
 
     # Vykreslení modrého pozadí
     screen.fill(DARK_BROWN)
 
     # Vykreslení kámenem inspirovaného obrazce
-    tank(-400,200)
+    tank([0],[1])
     palma(screen)
 
 
