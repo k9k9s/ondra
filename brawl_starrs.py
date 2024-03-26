@@ -51,7 +51,13 @@ LIGHT_BROWN = (210, 105, 30)
 
 DARK_BROWN = (139, 69, 19)
 
+strela = pygame.image.load("z0pq38qb.png")
+strela = pygame.transform.scale(strela, (36,9))
 
+def vystreli(screen):
+    # Načtení obrázku tanku
+
+    screen.blit(strela, (s_pozice))
 
 
 def palma(screen):
@@ -116,9 +122,16 @@ dozadu = pygame.K_s
 doprava = pygame.K_d
 doleva = pygame.K_a
 
+vystrel = pygame.K_SPACE
 
-pozice = [-500, -400]
+kamen = 100
+drevo = 100
+
+pozice = [kamen ,drevo ]
 rychlost = [0,0]
+
+s_pozice = [kamen  + 45,drevo - 21]
+s_rychlost = [20,0]
 
 # Hlavní smyčka
 running = True
@@ -160,6 +173,9 @@ while running:
     # Vykreslení kámenem inspirovaného obrazce
     tank(pozice[0],pozice[1])
     palma(screen)
+
+
+    vystreli(screen)
 
 
 
