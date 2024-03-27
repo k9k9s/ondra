@@ -130,7 +130,7 @@ drevo = 100
 pozice = [kamen ,drevo ]
 rychlost = [0,0]
 
-s_pozice = [kamen  + 45,drevo - 21]
+s_pozice = [drevo + 45,kamen  - 21]
 s_rychlost = [20,0]
 
 # Hlavní smyčka
@@ -157,17 +157,17 @@ while running:
     screen.fill(DARK_BROWN)
 
 
-    pozice[0] += rychlost[0]
-    pozice[1] += rychlost[1]
+    drevo += rychlost[0]
+    kamen += rychlost[1]
 
-    if pozice[0] < 0:
-        pozice[0] = 0
-    if pozice[1] < 0:
-        pozice[1] = 0
-    if pozice[0] > WIDTH - 60:
-        pozice[0] = WIDTH - 60
-    if pozice[1] > HEIGHT - 30:
-        pozice[1] = HEIGHT - 30
+    if drevo < 0:
+        drevo = 0
+    if kamen < 0:
+        kamen = 0
+    if drevo > WIDTH - 60:
+        drevo = WIDTH - 60
+    if kamen > HEIGHT - 30:
+        kamen = HEIGHT - 30
 
 
     # Vykreslení kámenem inspirovaného obrazce
