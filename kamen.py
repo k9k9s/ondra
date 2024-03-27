@@ -67,6 +67,7 @@ def palma(screen):
 
 
 def tank(x,y):
+    y = y - 513
     pygame.draw.rect(screen, DARK_GREEN,(x+500 -490, y+500, 25, 25))
     pygame.draw.rect(screen, DARK_GRAY, (x+490 -490, y+490, 45, 10))
     pygame.draw.rect(screen, DARK_GRAY, (x+490 -490, y+525, 45, 10))
@@ -130,8 +131,9 @@ drevo = 100
 pozice = [kamen ,drevo ]
 rychlost = [0,0]
 
-s_pozice = [drevo + 45,kamen  - 21]
+s_pozice = [drevo + 40,kamen  - 21]
 s_rychlost = [20,0]
+
 
 # Hlavní smyčka
 running = True
@@ -146,11 +148,13 @@ while running:
             if event.key == dozadu:
                 rychlost[0] = -2
 
+
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
                 rychlost[0] = 0
             if event.key == dopredu:
                 rychlost[0] = 0
+
 
 
     # Vykreslení modrého pozadí
@@ -159,6 +163,7 @@ while running:
 
     drevo += rychlost[0]
     kamen += rychlost[1]
+    s_pozice[0] += s_rychlost[0]
 
     if drevo < 0:
         drevo = 0
@@ -174,8 +179,11 @@ while running:
     tank(drevo,kamen)
     palma(screen)
 
-
     vystreli(screen)
+
+
+
+
 
 
 
