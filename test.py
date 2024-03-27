@@ -38,6 +38,12 @@ LIGHT_BROWN = (210, 105, 30)
 
 DARK_GRAY = (64, 64, 64)
 
+
+def palma(screen):
+    # Načtení obrázku tanku
+    palma = pygame.image.load("C:\\python/python-palma.png")
+    screen.blit(palma, (300, 200))
+
 def tank(x,y):
     pygame.draw.rect(screen, DARK_GREEN,(x+500 - 490 , y+500, 25, 25))
     pygame.draw.rect(screen, DARK_GRAY, (x+490 - 490 , y+490, 45, 10))
@@ -82,7 +88,7 @@ def tank(x,y):
 
 screen = pygame.display.set_mode((1500, 800))
 clock = pygame.time.Clock()
-fps = 60
+fps = 120
 
 dopredu = pygame.K_w
 dozadu = pygame.K_s
@@ -100,9 +106,9 @@ while True:
         if event.type == pygame.KEYDOWN:
             # zmackl klavesu
             if event.key == dopredu:
-                rychlost[0] = 2
+                rychlost[0] = 1
             if event.key == dozadu:
-                rychlost[0] = -2
+                rychlost[0] = -1
 
 
 
@@ -118,7 +124,7 @@ while True:
     screen.fill(WHITE)
 
     tank(pozice[0], pozice[1])
-
+    palma(screen)
     pozice[0] += rychlost[0]
 
 
