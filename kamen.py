@@ -112,7 +112,6 @@ def tank(x,y):
 
 clock = pygame.time.Clock()
 fps = 60
-
 # Vytvoření okna
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("hra")
@@ -149,6 +148,7 @@ while running:
                 rychlost[0] = -2
 
 
+
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
                 rychlost[0] = 0
@@ -179,9 +179,8 @@ while running:
     tank(drevo,kamen)
     palma(screen)
 
+
     vystreli(screen)
-
-
 
 
 
