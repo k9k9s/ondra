@@ -54,10 +54,12 @@ DARK_BROWN = (139, 69, 19)
 strela = pygame.image.load("z0pq38qb.png")
 strela = pygame.transform.scale(strela, (36,9))
 
-def vystreli(screen):
+def vystreli(screen, s):
     # Načtení obrázku tanku
+    print(s)
+    screen.blit(strela, s)
 
-    screen.blit(strela, (s_pozice))
+vysrelene_srely = []
 
 
 def palma(screen):
@@ -66,7 +68,10 @@ def palma(screen):
     screen.blit(palma, (300, 200))
 
 
+
+
 def tank(x,y):
+    y = y - 530
     pygame.draw.rect(screen, DARK_GREEN,(x+500 -490, y+500, 25, 25))
     pygame.draw.rect(screen, DARK_GRAY, (x+490 -490, y+490, 45, 10))
     pygame.draw.rect(screen, DARK_GRAY, (x+490 -490, y+525, 45, 10))
@@ -111,7 +116,6 @@ def tank(x,y):
 
 clock = pygame.time.Clock()
 fps = 60
-
 # Vytvoření okna
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("hra")
@@ -130,21 +134,31 @@ drevo = 100
 pozice = [kamen ,drevo ]
 rychlost = [0,0]
 
-s_pozice = [kamen  + 45,drevo - 21]
+s_pozice = [drevo + 40,kamen  - 21]
 s_rychlost = [20,0]
+
+
+
 
 # Hlavní smyčka
 running = True
 while running:
+
+    screen.fill(DARK_BROWN)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+
 
         if event.type == pygame.KEYDOWN:
             if event.key == dopredu:
                 rychlost[0] = 2
             if event.key == dozadu:
                 rychlost[0] = -2
+            if event.key == vystrel:
+                s_pozice = [drevo + 40, kamen - 21]
+                vysrelene_srely.append(s_pozice)
 
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
@@ -153,29 +167,36 @@ while running:
                 rychlost[0] = 0
 
 
+
     # Vykreslení modrého pozadí
-    screen.fill(DARK_BROWN)
 
 
-    pozice[0] += rychlost[0]
-    pozice[1] += rychlost[1]
 
-    if pozice[0] < 0:
-        pozice[0] = 0
-    if pozice[1] < 0:
-        pozice[1] = 0
-    if pozice[0] > WIDTH - 60:
-        pozice[0] = WIDTH - 60
-    if pozice[1] > HEIGHT - 30:
-        pozice[1] = HEIGHT - 30
+    drevo += rychlost[0]
+    kamen += rychlost[1]
+    for s in  vysrelene_srely:
+        s[0] += s_rychlost[0]
+        vystreli(screen, s)
+        if s[0] > 3000:
+            vysrelene_srely.remove(s)
+    if drevo < 0:
+        drevo = 0
+    if kamen < 0:
+        kamen = 0
+    if drevo > WIDTH - 60:
+        drevo = WIDTH - 60
+    if kamen > HEIGHT - 30:
+        kamen = HEIGHT - 30
 
 
     # Vykreslení kámenem inspirovaného obrazce
-    tank(pozice[0],pozice[1])
+    tank(drevo,kamen)
     palma(screen)
 
 
-    vystreli(screen)
+
+
+
 
 
 
