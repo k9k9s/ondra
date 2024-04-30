@@ -1,5 +1,6 @@
 import pygame
 import sys
+import math
 
 # Inicializace pygame
 pygame.init()
@@ -49,6 +50,9 @@ LIGHT_PINK = (255, 182, 193)
 LIGHT_BROWN = (210, 105, 30)
 
 
+
+
+
 DARK_BROWN = (139, 69, 19)
 
 strela = pygame.image.load("z0pq38qb.png")
@@ -56,7 +60,7 @@ strela = pygame.transform.scale(strela, (36,9))
 
 def vystreli(screen, s):
     # Načtení obrázku tanku
-    print(s)
+
     screen.blit(strela, s)
 
 vysrelene_srely = []
@@ -70,45 +74,17 @@ def palma(screen):
 
 
 
-def tank(x,y):
-    y = y - 530
-    pygame.draw.rect(screen, DARK_GREEN,(x+500 -490, y+500, 25, 25))
-    pygame.draw.rect(screen, DARK_GRAY, (x+490 -490, y+490, 45, 10))
-    pygame.draw.rect(screen, DARK_GRAY, (x+490 -490, y+525, 45, 10))
 
-    pygame.draw.rect(screen, WHITE, (x+492 -490, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+502 -490, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+512 -490, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+522 -490, y+525, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+532 -490, y+525, 2, 10))
 
-    pygame.draw.rect(screen, WHITE, (x+492 -490, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+502 -490, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+512 -490, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+522 -490, y+490, 2, 10))
-    pygame.draw.rect(screen, WHITE, (x+532 -490, y+490, 2, 10))
+def nakresli_tank(screen):
+    # Načtení obrázku tanku
+    screen.blit(tank, (x, y))
 
-    pygame.draw.rect(screen, BLACK, (x+511 -490, y+505, 5, 2))
-    pygame.draw.rect(screen, BLACK, (x+511 -490, y+520, 5, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+505 -490, y+511, 2, 5))
-    pygame.draw.rect(screen, BLACK, (x+520 -490, y+511, 2, 5))
 
-    pygame.draw.rect(screen, BLACK, (x+506 -490, y+509, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+507 -490, y+507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+509 -490, y+506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+516 -490, y+506, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+518 -490, y+507, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+519 -490, y+509, 2, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+506 -490, y+516, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+507 -490, y+518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+509 -490, y+519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+516 -490, y+519, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+518 -490, y+518, 2, 2))
-    pygame.draw.rect(screen, BLACK, (x+519 -490, y+516, 2, 2))
 
-    pygame.draw.rect(screen, BLACK, (x+520 -490, y+511, 15, 5))
+
 
 
 
@@ -120,6 +96,10 @@ fps = 60
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("hra")
 
+
+tank = pygame.image.load("leopard2a9.png").convert()
+tank.set_colorkey((255, 128, 255))
+
 dopredu = pygame.K_w
 dozadu = pygame.K_s
 
@@ -128,15 +108,18 @@ doleva = pygame.K_a
 
 vystrel = pygame.K_SPACE
 
-kamen = 100
-drevo = 100
+y = 100
+x = 100
 
-pozice = [kamen ,drevo ]
-rychlost = [0,0]
 
-s_pozice = [drevo + 40,kamen  - 21]
+rychlost = 0
+
+
 s_rychlost = [20,0]
 
+kamtocumim = 0
+
+toceni = [0,0]
 
 
 
@@ -153,44 +136,52 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == dopredu:
-                rychlost[0] = 2
+                rychlost = 2
             if event.key == dozadu:
-                rychlost[0] = -2
+                rychlost = -2
+            if event.key == doleva:
+                toceni[0] = 0.2
+            if event.key == doprava:
+                toceni[1] = 0.2
+
             if event.key == vystrel:
-                s_pozice = [drevo + 40, kamen - 21]
+                s_pozice = [x + 40, y + 18]
                 vysrelene_srely.append(s_pozice)
 
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
-                rychlost[0] = 0
+                rychlost = 0
             if event.key == dopredu:
-                rychlost[0] = 0
+                rychlost = 0
+            if event.key == doleva:
+                toceni[0] = 0
+            if event.key == doprava:
+                toceni[1] = 0
 
 
 
     # Vykreslení modrého pozadí
 
-
-
-    drevo += rychlost[0]
-    kamen += rychlost[1]
+    kamtocumim += toceni[1] - toceni[0]
+    x += rychlost*math.cos(kamtocumim)
+    y += rychlost * math.sin(kamtocumim)
     for s in  vysrelene_srely:
         s[0] += s_rychlost[0]
         vystreli(screen, s)
         if s[0] > 3000:
             vysrelene_srely.remove(s)
-    if drevo < 0:
-        drevo = 0
-    if kamen < 0:
-        kamen = 0
-    if drevo > WIDTH - 60:
-        drevo = WIDTH - 60
-    if kamen > HEIGHT - 30:
-        kamen = HEIGHT - 30
+    if x < 0:
+        x = 0
+    if y < 0:
+        y = 0
+    if x > WIDTH - 60:
+        x = WIDTH - 60
+    if y > HEIGHT - 30:
+        y = HEIGHT - 30
 
 
     # Vykreslení kámenem inspirovaného obrazce
-    tank(drevo,kamen)
+    nakresli_tank(screen)
     palma(screen)
 
 
