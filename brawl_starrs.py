@@ -50,13 +50,32 @@ LIGHT_PINK = (255, 182, 193)
 LIGHT_BROWN = (210, 105, 30)
 
 
+def blitRotate(surf, image, pos, originPos, angle):
+    # offset from pivot to center
+    image_rect = image.get_rect(topleft=(pos[0] - originPos[0], pos[1] - originPos[1]))
+    offset_center_to_pivot = pygame.math.Vector2(pos) - image_rect.center
 
+    # roatated offset from pivot to center
+    rotated_offset = offset_center_to_pivot.rotate(-angle)
 
+    # roatetd image center
+    rotated_image_center = (pos[0] - rotated_offset.x, pos[1] - rotated_offset.y)
 
-DARK_BROWN = (139, 69, 19)
+    # get a rotated image
+    rotated_image = pygame.transform.rotate(image, angle)
+    rotated_image_rect = rotated_image.get_rect(center=rotated_image_center)
+
+    # rotate and blit the image
+    surf.blit(rotated_image, rotated_image_rect)
+
+    # draw rectangle around the image
+
+    # pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)
+
 
 strela = pygame.image.load("z0pq38qb.png")
 strela = pygame.transform.scale(strela, (36,9))
+
 
 def vystreli(screen, s):
     # Načtení obrázku tanku
@@ -76,9 +95,10 @@ def palma(screen):
 
 
 
-def nakresli_tank(screen):
+def nakresli_tank(screen, kamtocivim ):
     # Načtení obrázku tanku
-    screen.blit(tank, (x, y))
+
+    blitRotate(screen,tank,(x,y),(25,25),- kamtocivim / math.pi * 180)
 
 
 
@@ -119,8 +139,16 @@ s_rychlost = [20,0]
 
 kamtocumim = 0
 
+
 toceni = [0,0]
 
+
+
+charged = 0
+charge_time = 1.5
+charge_frames = charge_time*fps
+chargebar_max = 60
+charge_increment = chargebar_max/charge_frames
 
 
 # Hlavní smyčka
@@ -140,13 +168,16 @@ while running:
             if event.key == dozadu:
                 rychlost = -2
             if event.key == doleva:
-                toceni[0] = 0.2
+                toceni[0] = 0.04
             if event.key == doprava:
-                toceni[1] = 0.2
+                toceni[1] = 0.04
 
-            if event.key == vystrel:
+
+
+            if event.key == vystrel and charged >= chargebar_max:
                 s_pozice = [x + 40, y + 18]
                 vysrelene_srely.append(s_pozice)
+                charged = 0
 
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
@@ -180,8 +211,23 @@ while running:
         y = HEIGHT - 30
 
 
+
+    print(charged)
+    pygame.draw.rect(screen,DARK_GRAY,pygame.Rect(x-9,y-23,chargebar_max+6,11))
+    if charged < chargebar_max:
+        charged += charge_increment
+    chargebar = pygame.Rect(x-6,y-20,charged,5)
+    if charged >= chargebar_max:
+        pygame.draw.rect(screen,DARK_RED,chargebar)
+    else:
+        pygame.draw.rect(screen,YELLOW,chargebar)
+
+
     # Vykreslení kámenem inspirovaného obrazce
-    nakresli_tank(screen)
+    nakresli_tank(screen, kamtocivim=kamtocumim)
+    print(kamtocumim)
+
+
     palma(screen)
 
 
