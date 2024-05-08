@@ -2,8 +2,6 @@ import pygame
 import sys
 import math
 
-## ahoj, tohle ti sem napsal tata
-
 # Inicializace pygame
 pygame.init()
 
@@ -75,7 +73,7 @@ def blitRotate(surf, image, pos, originPos, angle):
     # pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)
 
 
-strela = pygame.image.load("z0pq38qb.png")
+strela = pygame.image.load("C://python//raketa.png")
 strela = pygame.transform.scale(strela, (36,9))
 
 
@@ -89,7 +87,7 @@ vysrelene_srely = []
 
 def palma(screen):
     # Načtení obrázku tanku
-    palma = pygame.image.load("python-palma.png")
+    palma = pygame.image.load("C://python//python-palma.png")
     screen.blit(palma, (300, 200))
 
 
@@ -119,7 +117,7 @@ screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("hra")
 
 
-tank = pygame.image.load("leopard2a9.png").convert()
+tank = pygame.image.load("C://python//leopard2a9.png").convert()
 tank.set_colorkey((255, 128, 255))
 
 dopredu = pygame.K_w
@@ -227,7 +225,7 @@ while running:
 
     # Vykreslení kámenem inspirovaného obrazce
     nakresli_tank(screen, kamtocivim=kamtocumim)
-    print(kamtocumim)
+
 
 
     palma(screen)
