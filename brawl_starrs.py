@@ -2,7 +2,7 @@ import pygame
 import sys
 import math
 
-## ahoj, tohle ti sem napsal tata
+## ahoj, tohle ti sem napsal tata 2
 
 # Inicializace pygame
 pygame.init()
