@@ -3,7 +3,7 @@ GRAY = (128, 128, 128)
 DARK_GRAY = (64, 64, 64)
 WHITE = (255, 255, 255)
 DARK_WHITE = (128, 128, 128)
-
+# blblblblblblblblaa
 
 # Tmavé odstíny
 DARK_BLUE = (0, 0, 128)
