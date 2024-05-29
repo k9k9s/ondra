@@ -62,4 +62,4 @@ def blitRotate(surf, image, pos, originPos, angle):
 
     # draw rectangle around the image
 
-    pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)
+    # pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)
