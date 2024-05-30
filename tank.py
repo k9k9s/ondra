@@ -5,8 +5,8 @@ from pomocne_funkce import *
 rychlost=2
 toceni = 0.04
 
-tank = pygame.image.load("leopard2a9.png").convert()
-tank.set_colorkey((255, 128, 255))
+tank = pygame.image.load("tanks.png")
+tank = pygame.transform.scale(tank, (90,40))
 
 
 class Tank:
