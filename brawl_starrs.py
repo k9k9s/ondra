@@ -102,7 +102,7 @@ while running:
 
 
             if event.key == vystrel and charged >= chargebar_max:
-                s_pozice = [hrac1.pozice[0] + 40, hrac1.pozice[1] + 18]
+                s_pozice = [hrac1.pozice[0] , hrac1.pozice[1] ]
                 nova_strela = Strela( s_pozice, hrac1.smer,1)
                 vysrelene_srely.append(nova_strela)
                 charged = 0
