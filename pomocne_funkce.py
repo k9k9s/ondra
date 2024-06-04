@@ -3,6 +3,7 @@ import pygame
 import sys
 import math
 
+FPS= 60
 # Barvy
 GRAY = (128, 128, 128)
 DARK_GRAY = (64, 64, 64)

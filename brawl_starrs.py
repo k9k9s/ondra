@@ -40,39 +40,27 @@ pygame.display.set_caption("hra")
 
 dopredu = pygame.K_w
 dozadu = pygame.K_s
-
 doprava = pygame.K_d
 doleva = pygame.K_a
-
 vystrel = pygame.K_SPACE
+kulomet = pygame.K_LSHIFT
+
+
+dopredu2 = pygame.K_KP_8
+dozadu2 = pygame.K_KP_5
+doprava2 = pygame.K_KP_6
+doleva2 = pygame.K_KP_4
+vystrel2 = pygame.K_KP_0
+kulomet2 = pygame.K_KP_ENTER
+
 
 hrac1 = Tank([100,100], 0)
+hrac2 = Tank([1400,700], 0)
 
 
-
-rychlost = 0
-
-
-
-
-
-
-kulomet = pygame.K_LSHIFT
-kulomet_str = False
 
 k_rychlost = [20,0]
 
-
-
-toceni = [0,0]
-
-
-
-charged = 0
-charge_time = 1.5
-charge_frames = charge_time*fps
-chargebar_max = 60
-charge_increment = chargebar_max/charge_frames
 
 
 # Hlavní smyčka
@@ -88,43 +76,70 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == dopredu:
-                rychlost = 2
+                hrac1.rychlost = 2
             if event.key == dozadu:
-                rychlost = -2
+                hrac1.rychlost = -2
             if event.key == doleva:
-                toceni[0] = 0.04
+                hrac1.toceni[0] = 0.04
             if event.key == doprava:
-                toceni[1] = 0.04
+                hrac1.toceni[1] = 0.04
+
+            if event.key == dopredu2:
+                hrac2.rychlost = 2
+            if event.key == dozadu2:
+                hrac2.rychlost = -2
+            if event.key == doleva2:
+                hrac2.toceni[0] = 0.04
+            if event.key == doprava2:
+                hrac2.toceni[1] = 0.04
+
             if event.key == kulomet:
-                kulomet_str = True
+                hrac1.kulomet_str = True
+            if event.key == kulomet2:
+                hrac2.kulomet_str = True
 
 
 
-            if event.key == vystrel and charged >= chargebar_max:
-                s_pozice = [hrac1.pozice[0] , hrac1.pozice[1] ]
-                nova_strela = Strela( s_pozice, hrac1.smer,1)
-                vysrelene_srely.append(nova_strela)
-                charged = 0
+            if event.key == vystrel and hrac1.charged >= chargebar_max:
+
+                vysrelene_srely.append(hrac1.vystrel())
+
+            if event.key == vystrel2 and hrac2.charged >= chargebar_max:
+
+                vysrelene_srely.append(hrac2.vystrel())
+
+
 
         if event.type == pygame.KEYUP:
             if event.key == dozadu:
-                rychlost = 0
+                hrac1.rychlost = 0
             if event.key == dopredu:
-                rychlost = 0
+                hrac1.rychlost = 0
             if event.key == doleva:
-                toceni[0] = 0
+                hrac1.toceni[0] = 0
             if event.key == doprava:
-                toceni[1] = 0
+                hrac1.toceni[1] = 0
+
+            if event.key == dozadu2:
+                hrac2.rychlost = 0
+            if event.key == dopredu2:
+                hrac2.rychlost = 0
+            if event.key == doleva2:
+                hrac2.toceni[0] = 0
+            if event.key == doprava2:
+                hrac2.toceni[1] = 0
+
             if event.key == kulomet:
-                kulomet_str = False
+                hrac1.kulomet_str = False
+            if event.key == kulomet2:
+                hrac2.kulomet_str = False
 
 
 
-    # Vykreslení modrého pozadí
+    hrac1.posun()
+    hrac2.posun()
 
-    hrac1.pozice[0] += rychlost*math.cos(hrac1.smer)
-    hrac1.smer += toceni[1] - toceni[0]
-    hrac1.pozice[1] += rychlost * math.sin(hrac1.smer)
+
     for s in  vysrelene_srely:
         s.posun()
         s.nakresli(screen)
@@ -139,35 +154,50 @@ while running:
     if hrac1.pozice[1] > HEIGHT - 30:
         hrac1.pozice[1] = HEIGHT - 30
 
-    if kulomet_str:
-        if charged >= chargebar_max/60:
 
-            charged -= chargebar_max/60
+    if hrac2.pozice[0] < 0:
+        hrac2.pozice[0] = 0
+    if hrac2.pozice[1] < 0:
+        hrac2.pozice[1] = 0
+    if hrac2.pozice[0] > WIDTH - 60:
+        hrac2.pozice[0] = WIDTH - 60
+    if hrac2.pozice[1] > HEIGHT - 30:
+        hrac2.pozice[1] = HEIGHT - 30
+
+    if hrac1.kulomet_str:
+        if hrac1.charged >= chargebar_max/60:
+
+            hrac1.charged -= chargebar_max/60
 
             if fps_was%3 == 0:
                   k_pozice = [hrac1.pozice[0] + 30, hrac1.pozice[1] + 15]
                   nova_strela = Strela(k_pozice, hrac1.smer,0)
                   vysrelene_srely.append(nova_strela)
         else:
-            charged = 0
+            hrac1.charged = 0
+            
+    if hrac2.kulomet_str:
+        if hrac2.charged >= chargebar_max/60:
+
+            hrac2.charged -= chargebar_max/60
+
+            if fps_was%3 == 0:
+                  k_pozice = [hrac2.pozice[0] + 30, hrac2.pozice[1] + 15]
+                  nova_strela = Strela(k_pozice, hrac2.smer,0)
+                  vysrelene_srely.append(nova_strela)
+        else:
+            hrac2.charged = 0
 
 
 
 
 
-    pygame.draw.rect(screen,DARK_GRAY,pygame.Rect(hrac1.pozice[0]-9,hrac1.pozice[1]-23,chargebar_max+6,11))
-    if charged < chargebar_max:
-        charged += charge_increment
-    chargebar = pygame.Rect(hrac1.pozice[0]-6,hrac1.pozice[1]-20,charged,5)
-    if charged >= chargebar_max:
-        pygame.draw.rect(screen,DARK_RED,chargebar)
-    else:
-        pygame.draw.rect(screen,YELLOW,chargebar)
+
 
 
     # Vykreslení kámenem inspirovaného obrazce
     hrac1.nakresli(screen)
-
+    hrac2.nakresli(screen)
 
 
     palma(screen)
