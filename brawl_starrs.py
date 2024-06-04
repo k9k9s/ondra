@@ -14,7 +14,6 @@ from strela import Strela
 from pomocne_funkce import *
 from tank import *
 
-## ahoj, tohle ti sem napsal tata
 
 
 
