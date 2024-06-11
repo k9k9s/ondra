@@ -149,12 +149,23 @@ while running:
             if s.kohotoje == hrac2.kdojsem:
                 if s.cotoje == KANON:
                     hrac1.zmiz()
-
+                    vysrelene_srely.remove(s)
+                elif s.cotoje == KULOMET:
+                    hrac1.charged -= chargebar_max/60 * 3
+                    vysrelene_srely.remove(s)
+                    if hrac1.charged < 0:
+                        hrac1.charged = 0
 
         if s.hitbox().colliderect(hrac2.hitbox()):
             if s.kohotoje == hrac1.kdojsem:
                 if s.cotoje == KANON:
                     hrac2.zmiz()
+                    vysrelene_srely.remove(s)
+                elif s.cotoje == KULOMET:
+                    hrac2.charged -= chargebar_max/60 * 3
+                    vysrelene_srely.remove(s)
+                    if hrac2.charged < 0:
+                        hrac2.charged = 0
 
 
 
