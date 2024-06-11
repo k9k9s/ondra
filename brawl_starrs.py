@@ -10,7 +10,7 @@ screen = pygame.display.set_mode(WINDOW_SIZE)
 
 import sys
 import math
-from strela import Strela
+from strela import *
 from pomocne_funkce import *
 from tank import *
 
@@ -54,8 +54,8 @@ vystrel2 = pygame.K_KP_0
 kulomet2 = pygame.K_KP_ENTER
 
 
-hrac1 = Tank([100,100], 0)
-hrac2 = Tank([1400,700], 0)
+hrac1 = Tank([100,100], 0,kdojsem = 1)
+hrac2 = Tank([1400,700], 0, kdojsem = 2)
 
 
 
@@ -98,15 +98,9 @@ while running:
             if event.key == kulomet2:
                 hrac2.kulomet_str = True
 
-
-
             if event.key == vystrel and hrac1.charged >= chargebar_max:
-
                 vysrelene_srely.append(hrac1.vystrel())
 
-            if event.key == vystrel2 and hrac2.charged >= chargebar_max:
-
-                vysrelene_srely.append(hrac2.vystrel())
 
 
 
@@ -134,10 +128,17 @@ while running:
             if event.key == kulomet2:
                 hrac2.kulomet_str = False
 
+            if event.key == vystrel2 and hrac2.charged >= chargebar_max:
+                vysrelene_srely.append(hrac2.vystrel())
+
+
+
 
 
     hrac1.posun()
     hrac2.posun()
+
+
 
 
     for s in  vysrelene_srely:
@@ -145,6 +146,10 @@ while running:
         s.nakresli(screen)
         if s.pozice[0] > 3000:
             vysrelene_srely.remove(s)
+
+
+
+
     if hrac1.pozice[0] < 0:
         hrac1.pozice[0] = 0
     if hrac1.pozice[1] < 0:
@@ -164,33 +169,32 @@ while running:
     if hrac2.pozice[1] > HEIGHT - 30:
         hrac2.pozice[1] = HEIGHT - 30
 
+
+
     if hrac1.kulomet_str:
         if hrac1.charged >= chargebar_max/60:
-
             hrac1.charged -= chargebar_max/60
 
             if fps_was%3 == 0:
                   k_pozice = [hrac1.pozice[0] + 30, hrac1.pozice[1] + 15]
-                  nova_strela = Strela(k_pozice, hrac1.smer,0)
+                  nova_strela = Strela(k_pozice, hrac1.smer,hrac1.kdojsem,KULOMET)
                   vysrelene_srely.append(nova_strela)
         else:
             hrac1.charged = 0
-            
+
+
+
+
     if hrac2.kulomet_str:
         if hrac2.charged >= chargebar_max/60:
-
             hrac2.charged -= chargebar_max/60
 
             if fps_was%3 == 0:
                   k_pozice = [hrac2.pozice[0] + 30, hrac2.pozice[1] + 15]
-                  nova_strela = Strela(k_pozice, hrac2.smer,0)
+                  nova_strela = Strela(k_pozice, hrac2.smer,hrac2.kdojsem,KULOMET)
                   vysrelene_srely.append(nova_strela)
         else:
             hrac2.charged = 0
-
-
-
-
 
 
 
@@ -200,11 +204,7 @@ while running:
     hrac2.nakresli(screen)
 
 
-    palma(screen)
-
-
-
-
+    #palma(screen)
 
 
 
