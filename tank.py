@@ -58,3 +58,6 @@ class Tank:
     def hitbox(self):
         hitbox = rotate( tank, (self.pozice[0], self.pozice[1]), (25, 25), - self.smer / math.pi * 180)[1]
         return hitbox
+
+    # lijgfrshgf
+

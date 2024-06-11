@@ -39,3 +39,5 @@ class Strela:
     def hitbox(self):
 
         return pygame.Rect(self.pozice[0], self.pozice[1], 7, 7)
+
+    #jmhgfuye
