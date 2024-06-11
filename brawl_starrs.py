@@ -1,6 +1,6 @@
 import pygame
 
-# Inicializace pygame
+
 pygame.init()
 
 WIDTH, HEIGHT = 1500,800
@@ -24,7 +24,7 @@ from tank import *
 
 
 def palma(screen):
-    # Načtení obrázku tanku
+
     palma = pygame.image.load("python-palma.png")
     screen.blit(palma, (300, 200))
 
@@ -35,7 +35,6 @@ vysrelene_srely = []
 clock = pygame.time.Clock()
 fps = 60
 fps_was = 0
-# Vytvoření okna
 pygame.display.set_caption("hra")
 
 dopredu = pygame.K_w
@@ -63,7 +62,6 @@ k_rychlost = [20,0]
 
 
 
-# Hlavní smyčka
 running = True
 while running:
 
@@ -134,7 +132,6 @@ while running:
 
 
 
-
     hrac1.posun()
     hrac2.posun()
 
@@ -146,7 +143,18 @@ while running:
         s.nakresli(screen)
         if s.pozice[0] > 3000:
             vysrelene_srely.remove(s)
+            continue
 
+        if s.hitbox().colliderect(hrac1.hitbox()):
+            if s.kohotoje == hrac2.kdojsem:
+                if s.cotoje == KANON:
+                    hrac1.zmiz()
+
+
+        if s.hitbox().colliderect(hrac2.hitbox()):
+            if s.kohotoje == hrac1.kdojsem:
+                if s.cotoje == KANON:
+                    hrac2.zmiz()
 
 
 
@@ -168,6 +176,7 @@ while running:
         hrac2.pozice[0] = WIDTH - 60
     if hrac2.pozice[1] > HEIGHT - 30:
         hrac2.pozice[1] = HEIGHT - 30
+
 
 
 
@@ -199,22 +208,19 @@ while running:
 
 
 
-    # Vykreslení kámenem inspirovaného obrazce
     hrac1.nakresli(screen)
     hrac2.nakresli(screen)
-
-
     #palma(screen)
 
 
 
 
 
-    # Aktualizace obrazovky
     pygame.display.flip()
 
     clock.tick(fps)
 
-# Ukončení pygame
+
+
 pygame.quit()
 sys.exit()

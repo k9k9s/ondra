@@ -43,7 +43,9 @@ LIGHT_WHITE = (255, 255, 255)
 LIGHT_PURPLE = (221, 160, 221)
 LIGHT_PINK = (255, 182, 193)
 LIGHT_BROWN = (210, 105, 30)
-def blitRotate(surf, image, pos, originPos, angle):
+
+
+def rotate( image, pos, originPos, angle):
     # offset from pivot to center
     image_rect = image.get_rect(topleft=(pos[0] - originPos[0], pos[1] - originPos[1]))
     offset_center_to_pivot = pygame.math.Vector2(pos) - image_rect.center
@@ -58,9 +60,18 @@ def blitRotate(surf, image, pos, originPos, angle):
     rotated_image = pygame.transform.rotate(image, angle)
     rotated_image_rect = rotated_image.get_rect(center=rotated_image_center)
 
+    return rotated_image, rotated_image_rect
+
+
+
+
+def blitRotate(surf, image, pos, originPos, angle):
+    # offset from pivot to center
+    rotated_image, rotated_image_rect = rotate(image, pos, originPos, angle)
+
     # rotate and blit the image
     surf.blit(rotated_image, rotated_image_rect)
 
     # draw rectangle around the image
 
-    # pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)
+    pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)

@@ -36,4 +36,6 @@ class Strela:
         self.pozice[0] += self.rychlost * math.cos(self.smer)
         self.pozice[1] += self.rychlost * math.sin(self.smer)
 
+    def hitbox(self):
 
+        return pygame.Rect(self.pozice[0], self.pozice[1], 7, 7)

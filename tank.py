@@ -22,8 +22,15 @@ class Tank:
         self.kulomet_str = False
         self.charged = 20
         self.kdojsem = kdojsem
+        self.žiju = True
+
+    def zmiz(self):
+        self.žiju = False
+
 
     def nakresli(self, screen):
+        if not self.žiju:
+            return
         blitRotate(screen, tank, (self.pozice[0], self.pozice[1]), (25, 25), - self.smer / math.pi * 180)
         pygame.draw.rect(screen, DARK_GRAY, pygame.Rect(self.pozice[0] - 9, self.pozice[1] - 23, chargebar_max + 6, 11))
         if self.charged < chargebar_max:
@@ -47,3 +54,7 @@ class Tank:
         nova_strela = Strela( s_pozice, self.smer,self.kdojsem,KANON)
         self.charged = 0
         return nova_strela
+
+    def hitbox(self):
+        hitbox = rotate( tank, (self.pozice[0], self.pozice[1]), (25, 25), - self.smer / math.pi * 180)[1]
+        return hitbox
