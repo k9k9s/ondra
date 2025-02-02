@@ -7,13 +7,18 @@ kam_lze_jit_a_hori = []
 mistnosti = ["0-obývák", "1-chodba", "2-sklep", "3-trůnní sál", "4-jídelna","5-terasa","6-půda","7-kumbál","8-sídlo","9-ložnice","10-chodba","11-tajemna komnata"]
 chodby = [[1, 2,4,], [0,4,6], [0,11], [1, 2],[1,0,5,7],[4,6,10],[1,5],[4],[10],[10],[9,8,5],[2]]
 zamcene_chodby = [[], [3], [], [],[],[],[],[],[],[],[],[],[]]
-inventar = {"klic" : False, "moje zlato":0,"burger":False,"hasicak":False,"hulka":False}
+inventar = {"klic": False,
+            "moje zlato": 0,
+            "burger": False,
+            "hasicak": False,
+            "hulka": False
+            }
 cena_burgeru=15
 sytost=4
 mistnost_s_klicem = random.choice([1,2,5,6,7,9,10])
 mistnost_s_hasicakem = 2
 mistnost_s_pasti = random.choice([1,7])
-zlato = [1, 0, 10, 100,15,20,3,0,50,30,0,10]
+zlato = [1, 0, 10, 100, 15,20,3,0,50,30,0,10]
 hrac = 0
 skore = 0
 kroky = 0
@@ -155,6 +160,9 @@ while not hotovo():
             vstup_ok=True
         elif je_cislo(vstup) and int(vstup) <= len(kam_lze_jit) and int(vstup) > 0 :
             vstup_ok=True
+        else:
+            print(Fore.RED + "MAS SPATNY VSTUP")
+            print(Style.RESET_ALL)
 
 
 
