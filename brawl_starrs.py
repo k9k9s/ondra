@@ -1,74 +1,36 @@
 import pygame
-
-
+from colorama import init, Fore, Style
 pygame.init()
-
 WIDTH, HEIGHT = 1500,800
 WINDOW_SIZE = (WIDTH, HEIGHT)
 screen = pygame.display.set_mode(WINDOW_SIZE)
-
-
 import sys
 import math
 from strela import *
 from pomocne_funkce import *
 from tank import *
 
-
-
-
-
-
-
-
-
-
 def palma(screen):
 
     palma = pygame.image.load("python-palma.png")
-    screen.blit(palma, (300, 200))
 
 vysrelene_srely = []
-
-
-
 clock = pygame.time.Clock()
 fps = 60
 fps_was = 0
 pygame.display.set_caption("hra")
-
-dopredu = pygame.K_w
-dozadu = pygame.K_s
-doprava = pygame.K_d
-doleva = pygame.K_a
-vystrel = pygame.K_SPACE
-kulomet = pygame.K_LSHIFT
-
-
-dopredu2 = pygame.K_KP_8
-dozadu2 = pygame.K_KP_5
-doprava2 = pygame.K_KP_6
-doleva2 = pygame.K_KP_4
-vystrel2 = pygame.K_KP_0
-kulomet2 = pygame.K_KP_ENTER
-
-
+k_rychlost = [20,0]
 hrac1 = Tank([100,100], 0,kdojsem = 1)
 hrac2 = Tank([1400,700], 0, kdojsem = 2)
 
 
-
-k_rychlost = [20,0]
-
-
-
 running = True
 while running:
-
     screen.fill(DARK_BROWN)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
 
 
 
@@ -78,24 +40,23 @@ while running:
             if event.key == dozadu:
                 hrac1.rychlost = -2
             if event.key == doleva:
-                hrac1.toceni[0] = 0.04
+                hrac1.toceni[0] = 0.02
             if event.key == doprava:
-                hrac1.toceni[1] = 0.04
+                hrac1.toceni[1] = 0.02
+            if event.key == kulomet:
+                hrac1.kulomet_str = True
+
 
             if event.key == dopredu2:
                 hrac2.rychlost = 2
             if event.key == dozadu2:
                 hrac2.rychlost = -2
             if event.key == doleva2:
-                hrac2.toceni[0] = 0.04
+                hrac2.toceni[0] = 0.02
             if event.key == doprava2:
-                hrac2.toceni[1] = 0.04
-
-            if event.key == kulomet:
-                hrac1.kulomet_str = True
+                hrac2.toceni[1] = 0.02
             if event.key == kulomet2:
                 hrac2.kulomet_str = True
-
             if event.key == vystrel and hrac1.charged >= chargebar_max:
                 vysrelene_srely.append(hrac1.vystrel())
 
@@ -107,10 +68,15 @@ while running:
                 hrac1.rychlost = 0
             if event.key == dopredu:
                 hrac1.rychlost = 0
+            if event.key == cheat:
+                hrac1.rychlost = 0
             if event.key == doleva:
                 hrac1.toceni[0] = 0
             if event.key == doprava:
                 hrac1.toceni[1] = 0
+            if event.key == kulomet:
+                hrac1.kulomet_str = False
+
 
             if event.key == dozadu2:
                 hrac2.rychlost = 0
@@ -120,12 +86,8 @@ while running:
                 hrac2.toceni[0] = 0
             if event.key == doprava2:
                 hrac2.toceni[1] = 0
-
-            if event.key == kulomet:
-                hrac1.kulomet_str = False
             if event.key == kulomet2:
                 hrac2.kulomet_str = False
-
             if event.key == vystrel2 and hrac2.charged >= chargebar_max:
                 vysrelene_srely.append(hrac2.vystrel())
 
@@ -145,27 +107,32 @@ while running:
             vysrelene_srely.remove(s)
             continue
 
+
         if s.hitbox().colliderect(hrac1.hitbox()):
             if s.kohotoje == hrac2.kdojsem:
                 if s.cotoje == KANON:
                     hrac1.zmiz()
                     vysrelene_srely.remove(s)
+                    print(Fore.GREEN + "hrac2 WIN")
                 elif s.cotoje == KULOMET:
                     hrac1.charged -= chargebar_max/60 * 3
                     vysrelene_srely.remove(s)
                     if hrac1.charged < 0:
                         hrac1.charged = 0
 
+
         if s.hitbox().colliderect(hrac2.hitbox()):
             if s.kohotoje == hrac1.kdojsem:
                 if s.cotoje == KANON:
                     hrac2.zmiz()
                     vysrelene_srely.remove(s)
+                    print(Fore.GREEN + "hrac1 WIN")
                 elif s.cotoje == KULOMET:
                     hrac2.charged -= chargebar_max/60 * 3
                     vysrelene_srely.remove(s)
                     if hrac2.charged < 0:
                         hrac2.charged = 0
+
 
 
 
@@ -203,8 +170,6 @@ while running:
             hrac1.charged = 0
 
 
-
-
     if hrac2.kulomet_str:
         if hrac2.charged >= chargebar_max/60:
             hrac2.charged -= chargebar_max/60
@@ -221,18 +186,14 @@ while running:
 
     hrac1.nakresli(screen)
     hrac2.nakresli(screen)
-    #palma(screen)
-
+    palma(screen)
 
 
 
 
     pygame.display.flip()
-
     clock.tick(fps)
-
 
 
 pygame.quit()
 sys.exit()
-#ifedoiurwK

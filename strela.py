@@ -26,8 +26,8 @@ class Strela:
         if self.cotoje == KANON:
             blitRotate(screen, strela, self.pozice , [18,4],- self.smer / math.pi * 180)
         elif self.cotoje == KULOMET:
-            surf = pygame.Surface((10,5))
-            pygame.draw.rect(surf, GRAY, pygame.Rect(0,0, 10, 5))
+            surf = pygame.Surface((5,3))
+            pygame.draw.rect(surf, GRAY, pygame.Rect(0,0, 5, 3))
             blitRotate(screen, surf, self.pozice, [18, 4], - self.smer / math.pi * 180)
 
 

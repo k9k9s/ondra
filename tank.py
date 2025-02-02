@@ -4,15 +4,17 @@ import math
 from pomocne_funkce import *
 from strela import *
 rychlost=2
-toceni = 0.04
+toceni = 0.02
 
-tank = pygame.image.load("leopard2a9.png").convert()
+tank = pygame.image.load("C://python//tanking.png").convert()
 tank.set_colorkey((255, 128, 255))
 
 charge_time = 1.5
 charge_frames = charge_time*FPS
 chargebar_max = 60
 charge_increment = chargebar_max/charge_frames
+
+
 class Tank:
     def __init__(self, pozice, smer, kdojsem):
         self.pozice = pozice

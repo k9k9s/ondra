@@ -45,6 +45,21 @@ LIGHT_PINK = (255, 182, 193)
 LIGHT_BROWN = (210, 105, 30)
 
 
+dopredu = pygame.K_w
+dozadu = pygame.K_s
+doprava = pygame.K_d
+doleva = pygame.K_a
+vystrel = pygame.K_SPACE
+kulomet = pygame.K_LSHIFT
+dopredu2 = pygame.K_KP_8
+dozadu2 = pygame.K_KP_5
+doprava2 = pygame.K_KP_6
+doleva2 = pygame.K_KP_4
+vystrel2 = pygame.K_KP_0
+kulomet2 = pygame.K_KP_ENTER
+cheat = pygame.K_f
+
+
 def rotate( image, pos, originPos, angle):
     # offset from pivot to center
     image_rect = image.get_rect(topleft=(pos[0] - originPos[0], pos[1] - originPos[1]))
@@ -75,4 +90,3 @@ def blitRotate(surf, image, pos, originPos, angle):
     # draw rectangle around the image
 
     # pygame.draw.rect(surf, (255, 0, 0), (*rotated_image_rect.topleft, *rotated_image.get_size()), 2)
-#oieráiuytw
