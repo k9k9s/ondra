@@ -6,7 +6,7 @@ from strela import *
 rychlost=2
 toceni = 0.02
 
-tank = pygame.image.load("C://python//tanking.png").convert()
+tank = pygame.image.load("tanking.png").convert()
 tank.set_colorkey((255, 128, 255))
 
 charge_time = 1.5
